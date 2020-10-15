@@ -42,10 +42,7 @@ public class CustomerController {
     }
 
     @Operation(summary = "Find a customer by id")
-    @GetMapping(
-            value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Customer> findCustomerById(@PathVariable Long id)
             throws CustomerNotFoundException {
         return ResponseEntity.ok(customerService.findCustomerById(id));
@@ -86,10 +83,7 @@ public class CustomerController {
     }
 
     @Operation(summary = "Delete a customer")
-    @DeleteMapping(
-            value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
         customerService.deleteCustomer(id);
         return ResponseEntity.ok("OK");
