@@ -1,4 +1,4 @@
-package com.customer.controller.response;
+package com.customer.controller.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
