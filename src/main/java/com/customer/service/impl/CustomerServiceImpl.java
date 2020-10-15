@@ -21,7 +21,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired private CustomerRepository customerRepository;
 
     @Override
-    public List<Customer> findAll() {
+    public List<Customer> findAllCustomers() {
         List<Customer> customerList = new ArrayList<>();
         for (CustomerEntity customer : customerRepository.findAll()) {
             customerList.add(
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer findCustomer(Long id) throws CustomerNotFoundException {
+    public Customer findCustomerById(Long id) throws CustomerNotFoundException {
         CustomerEntity customer = customerRepository.findById(id).orElse(null);
         if (customer == null) {
             throw new CustomerNotFoundException(Messages.CUSTOMER_NOT_FOUND);
@@ -47,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer create(Customer customer) {
+    public Customer createCustomer(Customer customer) {
         CustomerEntity customerEntity =
                 customerRepository.save(
                         new CustomerEntity(
@@ -58,5 +58,15 @@ public class CustomerServiceImpl implements CustomerService {
                 customer.getName(),
                 customer.getCpf(),
                 customer.getAddress());
+    }
+
+    @Override
+    public Customer updateCustomer(Customer customer) {
+        return null;
+    }
+
+    @Override
+    public Customer deleteCustomer(Long id) {
+        return null;
     }
 }

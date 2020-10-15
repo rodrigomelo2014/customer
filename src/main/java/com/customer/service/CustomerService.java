@@ -11,7 +11,7 @@ public interface CustomerService {
      * Method which return a list with the customers registered
      * @return
      */
-    List<Customer> findAll();
+    List<Customer> findAllCustomers();
 
     /**
      * Method which return a customer by id
@@ -19,12 +19,26 @@ public interface CustomerService {
      * @return
      * @throws CustomerNotFoundException
      */
-    Customer findCustomer(Long id) throws CustomerNotFoundException;
+    Customer findCustomerById(Long id) throws CustomerNotFoundException;
 
     /**
      * Method which register a new customer
      * @param customer
      * @return
      */
-    Customer create(Customer customer);
+    Customer createCustomer(Customer customer);
+
+    /**
+     * Method which update a customer
+     * @param customer
+     * @return
+     */
+    Customer updateCustomer(Customer customer);
+
+    /**
+     * Method which delete a customer
+     * @param id
+     * @return
+     */
+    Customer deleteCustomer(Long id);
 }

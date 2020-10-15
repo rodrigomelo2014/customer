@@ -30,7 +30,7 @@ public class CustomerController {
     @Operation(summary = "List all customers registered")
     @GetMapping
     public ResponseEntity<List<Customer>> findAllCustomers() {
-        return ResponseEntity.ok(customerService.findAll());
+        return ResponseEntity.ok(customerService.findAllCustomers());
     }
 
     @Operation(summary = "Find a customer by id")
@@ -40,7 +40,7 @@ public class CustomerController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> findCustomerById(@PathVariable Long id)
             throws CustomerNotFoundException {
-        return ResponseEntity.ok(customerService.findCustomer(id));
+        return ResponseEntity.ok(customerService.findCustomerById(id));
     }
 
     @Operation(summary = "Create a customer")
@@ -50,7 +50,7 @@ public class CustomerController {
     public ResponseEntity<Customer> createCustomer(
             @Valid @Parameter(description = "Customer to be created", required = true) @RequestBody
                     Customer request) {
-        return ResponseEntity.ok(customerService.create(request));
+        return ResponseEntity.ok(customerService.createCustomer(request));
     }
 
     @Operation(summary = "Update a customer")
@@ -62,7 +62,7 @@ public class CustomerController {
                     @Parameter(description = "Customer to be fully updated", required = true)
                     @RequestBody
                     Customer request) {
-        return ResponseEntity.ok(new Customer());
+        return ResponseEntity.ok(customerService.updateCustomer(request));
     }
 
     @Operation(summary = "Partial update a customer")
@@ -74,7 +74,7 @@ public class CustomerController {
                     @Parameter(description = "Customer to be partially updated", required = true)
                     @RequestBody
                     Customer request) {
-        return ResponseEntity.ok(new Customer());
+        return ResponseEntity.ok(customerService.updateCustomer(request));
     }
 
     @Operation(summary = "Delete a customer")
@@ -83,6 +83,6 @@ public class CustomerController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Customer> deleteCustomer(@PathVariable Long id) {
-        return ResponseEntity.ok(new Customer());
+        return ResponseEntity.ok(customerService.deleteCustomer(id));
     }
 }
