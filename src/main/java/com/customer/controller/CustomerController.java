@@ -2,6 +2,8 @@ package com.customer.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import com.customer.controller.dto.Customer;
 import com.customer.exceptions.CustomerNotFoundException;
 import com.customer.service.CustomerService;
@@ -34,17 +36,17 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer request) {
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer request) {
         return ResponseEntity.ok(customerService.create(request));
     }
 
     @PatchMapping
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer request) {
+    public ResponseEntity<Customer> updateCustomer(@Valid @RequestBody Customer request) {
         return ResponseEntity.ok(new Customer());
     }
 
     @PutMapping
-    public ResponseEntity<Customer> partialUpdateCustomer(@RequestBody Customer request) {
+    public ResponseEntity<Customer> partialUpdateCustomer(@Valid @RequestBody Customer request) {
         return ResponseEntity.ok(new Customer());
     }
 
