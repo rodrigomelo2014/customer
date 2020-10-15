@@ -1,7 +1,12 @@
 package com.customer.controller;
 
+import static com.customer.constants.CustomerConstants.OFFSET;
+import static com.customer.constants.CustomerConstants.PAGE;
+import static java.util.Optional.ofNullable;
+
 import java.util.List;
 import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import com.customer.controller.dto.Customer;
 import com.customer.exceptions.CustomerNotFoundException;
@@ -29,8 +34,11 @@ public class CustomerController {
 
     @Operation(summary = "List all customers registered")
     @GetMapping
-    public ResponseEntity<List<Customer>> findAllCustomers() {
-        return ResponseEntity.ok(customerService.findAllCustomers());
+    public ResponseEntity<List<Customer>> findAllCustomers(
+            @PathParam(PAGE) final Integer page, @PathParam(OFFSET) final Integer offset) {
+        return ResponseEntity.ok(
+                customerService.findAllCustomers(
+                        ofNullable(page).orElse(1), ofNullable(offset).orElse(10)));
     }
 
     @Operation(summary = "Find a customer by id")
@@ -82,7 +90,8 @@ public class CustomerController {
             value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Customer> deleteCustomer(@PathVariable Long id) {
-        return ResponseEntity.ok(customerService.deleteCustomer(id));
+    public ResponseEntity<String> deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
+        return ResponseEntity.ok("OK");
     }
 }

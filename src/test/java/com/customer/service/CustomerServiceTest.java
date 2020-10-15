@@ -41,7 +41,7 @@ public class CustomerServiceTest {
 
     @Test
     public void findAllCustomersTest() {
-        customerService.findAllCustomers();
+        customerService.findAllCustomers(1, 10);
     }
 
     @Test

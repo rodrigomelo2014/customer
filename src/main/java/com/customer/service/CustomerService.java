@@ -11,7 +11,7 @@ public interface CustomerService {
      * Method which return a list with the customers registered
      * @return
      */
-    List<Customer> findAllCustomers();
+    List<Customer> findAllCustomers(Integer page, Integer offset);
 
     /**
      * Method which return a customer by id
@@ -40,5 +40,5 @@ public interface CustomerService {
      * @param id
      * @return
      */
-    Customer deleteCustomer(Long id);
+    void deleteCustomer(Long id);
 }

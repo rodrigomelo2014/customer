@@ -21,9 +21,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired private CustomerRepository customerRepository;
 
     @Override
-    public List<Customer> findAllCustomers() {
+    public List<Customer> findAllCustomers(Integer page, Integer offset) {
         List<Customer> customerList = new ArrayList<>();
-        for (CustomerEntity customer : customerRepository.findAll()) {
+        List<CustomerEntity> customerEntityList = customerRepository.findAll();
+        for (CustomerEntity customer : customerEntityList) {
             customerList.add(
                     new Customer(
                             customer.getId(),
@@ -31,7 +32,7 @@ public class CustomerServiceImpl implements CustomerService {
                             customer.getCpf(),
                             customer.getAddress()));
         }
-        log.info(LogUtil.formatLog("findAll", null, customerList.toString()));
+        log.info(LogUtil.formatLog("findAllCustomers", null, customerList.toString()));
         return customerList;
     }
 
@@ -41,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer == null) {
             throw new CustomerNotFoundException(Messages.CUSTOMER_NOT_FOUND);
         }
-        log.info(LogUtil.formatLog("findCustomer", id.toString(), customer.toString()));
+        log.info(LogUtil.formatLog("findCustomerById", id.toString(), customer.toString()));
         return new Customer(
                 customer.getId(), customer.getName(), customer.getCpf(), customer.getAddress());
     }
@@ -52,7 +53,7 @@ public class CustomerServiceImpl implements CustomerService {
                 customerRepository.save(
                         new CustomerEntity(
                                 customer.getName(), customer.getCpf(), customer.getAddress()));
-        log.info(LogUtil.formatLog("create", customer.toString(), customerEntity.toString()));
+        log.info(LogUtil.formatLog("createCustomer", customer.toString(), customerEntity.toString()));
         return new Customer(
                 customerEntity.getId(),
                 customer.getName(),
@@ -66,7 +67,8 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer deleteCustomer(Long id) {
-        return null;
+    public void deleteCustomer(Long id) {
+        customerRepository.deleteById(id);
+        log.info(LogUtil.formatLog("deleteCustomer", id.toString(), null));
     }
 }
