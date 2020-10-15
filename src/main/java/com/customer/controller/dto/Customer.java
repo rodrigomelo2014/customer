@@ -1,9 +1,8 @@
 package com.customer.controller.dto;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
+import com.customer.validator.CPFValid;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,15 +18,11 @@ public class Customer {
     private Long id;
 
     /** Customer name */
-    @NotEmpty
-    private String name;
+    @NotEmpty private String name;
 
     /** Customer CPF */
-    @NotNull
-    @Size(min=11, max=11)
-    private String cpf;
+    @NotEmpty @CPFValid private String cpf;
 
     /** Customer address */
-    @NotEmpty
-    private String address;
+    @NotEmpty private String address;
 }
